@@ -1,28 +1,38 @@
-# Python caches
+# Python / venv / caches
 __pycache__/
-*.py[cod]
-*.pyo
-
-# Virtual envs
+*.pyc
 .venv/
-venv/
-
-# Test/coverage caches
 .pytest_cache/
-.coverage
-coverage.xml
-htmlcov/
+.mypy_cache/
 
-# Editor/OS
+# Editors/IDE
 .vscode/
 .idea/
-.DS_Store
 
-# App artifacts
-monitor.log
+# (Don't need this; .git isn't tracked anyway)
+.git/
+
+# Runtime artifacts (don’t commit state/logs)
 file_hashes.json
+monitor.log
+*.log
 
-# Env files (if you add any later)
+# Env / secrets
 .env
 .env.*
-.python-version
+*.pem
+*.key
+*.crt
+id_rsa*
+id_ed25519*
+
+# Build / dist / coverage
+build/
+dist/
+*.egg-info/
+.coverage*
+coverage.xml
+
+# OS cruft
+.DS_Store
+Thumbs.db
