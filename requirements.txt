@@ -1,1 +1,8 @@
+# === Dependencies for File Integrity Monitor (FIM) ===========================
+
+# Colorized terminal output for clearer alerts and statuses.
 colorama>=0.4.6
+
+# Gitignore-style pattern matching used to implement `.fimignore`
+# so you can exclude files/folders from monitoring.
+pathspec>=0.12.1
