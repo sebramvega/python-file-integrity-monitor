@@ -1,0 +1,28 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual envs
+.venv/
+venv/
+
+# Test/coverage caches
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+
+# App artifacts
+monitor.log
+file_hashes.json
+
+# Env files (if you add any later)
+.env
+.env.*
+.python-version
