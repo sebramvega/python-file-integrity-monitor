@@ -1,0 +1,18 @@
+# Python / venv / cache
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Git / editors
+.git/
+.github/
+.vscode/
+.idea/
+
+# Project artifacts
+monitor.log
+file_hashes.json
+
+# OS
+.DS_Store
