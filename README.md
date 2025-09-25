@@ -125,6 +125,7 @@ python-file-integrity-monitor/
 
 ## Troubleshooting
 * I see “/watched removed, /mnt/c added”
+
 You switched between Docker and WSL. Re-baseline in the environment you're using:
 ```bash
 # WSL
@@ -135,9 +136,12 @@ docker run --rm -v "/mnt/c/Users/...:/watched" -v "$PWD:/app" fim:latest /watche
 
 ```
 * VS Code shows “Import `‘pathspec’` could not be resolved”
+
 Select your venv interpreter: Ctrl+Shift+P → Python: Select Interpreter → .venv/bin/python.
 (It’s only an editor warning; the code falls back if `pathspec` isn’t installed.)
-*Too many false positives
+
+* Too many false positives
+
 Add/adjust patterns in `.fimignore` (lives in the watched folder).
 
 
