@@ -1,7 +1,5 @@
 # File Integrity Monitor (FIM)
 
-[![CI](https://github.com/sebramvega/python-file-integrity-monitor/actions/workflows/ci.yml/badge.svg)](https://github.com/sebramvega/python-file-integrity-monitor/actions/workflows/ci.yml)
-
 A lightweight, practical file integrity monitor that detects **additions, removals, and modifications** by hashing files and comparing against a saved baseline.
 
 - ✅ Hash algorithms: `sha256` (default), `sha512`, etc.
@@ -10,6 +8,17 @@ A lightweight, practical file integrity monitor that detects **additions, remova
 - ✅ Logging to `monitor.log`
 - ✅ Unit tests + GitHub Actions CI
 - ✅ Dockerized (optional)
+
+<p align="center">
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12%2B-blue" />
+  <img alt="Colorama" src="https://img.shields.io/badge/colorama-optional-lightgrey" />
+  <img alt="pathspec" src="https://img.shields.io/badge/pathspec-gitignore%20patterns-lightgrey" />
+  <img alt="Docker" src="https://img.shields.io/badge/docker-ready-2496ED" />
+  <a href="https://github.com/sebramvega/python-file-integrity-monitor/actions/workflows/ci.yml">
+    <img alt="CI" src="https://github.com/sebramvega/python-file-integrity-monitor/actions/workflows/ci.yml/badge.svg" />
+  </a>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green" />
+</p>
 
 ---
 
@@ -57,7 +66,7 @@ usage: file_integrity_monitor.py [-h] [-i INTERVAL] [--hash HASH] [--init] direc
 
 positional arguments:
   directory             Directory to monitor
-
+```
 options:
   -h, --help            Show help and exit
   -i, --interval        Interval in seconds (default: 10)
@@ -65,6 +74,7 @@ options:
   --init                Initialize baseline and exit
 
 - `--init` creates/updates `file_hashes.json` (the baseline) and exits.
+```
 - During monitoring, the tool prints and logs any files that were Added/Removed/Modified.
 
 ## How it works
@@ -108,7 +118,7 @@ CI runs the tests automatically on every push/PR (see badge at the top).
 
 
 ## Project structure
-```bash
+```
 python-file-integrity-monitor/
 ├─ file_integrity_monitor.py   # main tool (CLI)
 ├─ requirements.txt            # deps: colorama, pathspec
@@ -124,26 +134,24 @@ python-file-integrity-monitor/
 ```
 
 ## Troubleshooting
-* I see “/watched removed, /mnt/c added”
+- **I see “/watched removed, /mnt/c added”**  
+  You switched between Docker and WSL. Re-baseline in the environment you're using:
+  
+  ```bash
+  # WSL
+  python file_integrity_monitor.py /mnt/c/Users/... --hash sha256 --init
 
-You switched between Docker and WSL. Re-baseline in the environment you're using:
-```bash
-# WSL
-python file_integrity_monitor.py /mnt/c/Users/... --hash sha256 --init
+  # Docker
+  docker run --rm -v "/mnt/c/Users/...:/watched" -v "$PWD:/app" \
+    fim:latest /watched --hash sha256 --init
+  ```
+  
+- **VS Code shows “Import `pathspec` could not be resolved”**  
+  Select your venv interpreter: Ctrl+Shift+P → Python: Select Interpreter → `.venv/bin/python`.
+  (It’s only an editor warning; the code falls back if `pathspec` isn’t installed.)
 
-# Docker
-docker run --rm -v "/mnt/c/Users/...:/watched" -v "$PWD:/app" fim:latest /watched --hash sha256 --init
-
-```
-* VS Code shows “Import `‘pathspec’` could not be resolved”
-
-Select your venv interpreter: Ctrl+Shift+P → Python: Select Interpreter → .venv/bin/python.
-(It’s only an editor warning; the code falls back if `pathspec` isn’t installed.)
-
-* Too many false positives
-
-Add/adjust patterns in `.fimignore` (lives in the watched folder).
-
+- **Too many false positives**  
+  Add/adjust patterns in `.fimignore` (lives in the watched folder).
 
 ## License
 MIT License © 2025 [sebramvega]
